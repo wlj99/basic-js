@@ -34,5 +34,5 @@ let foo = {
 
 bar.apply2();//5
 bar.apply2(foo);//1
-bar2.apply2(foo,['test',29]);
-console.log(bar3.apply2(foo,['test',29]));
+// bar2.apply2(foo,['test',29]);
+// console.log(bar3.apply2(foo,['test',29]));

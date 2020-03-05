@@ -70,3 +70,16 @@ function isEqual(obj1, obj2){
   }
 
 }
+
+const p = Promise.resolve();
+
+( async () => {
+  await p;
+  console.log('await');
+})
+
+p.then( () => {
+  console.log('then1')
+}).then( () => {
+  console.log('then2');
+})
