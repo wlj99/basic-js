@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel='stylesheet' type='text/css' href='./css/index.css' />
+  <link rel='stylesheet' type='text/css' href='./src/css/index.css' />
 
   <title>Document</title>
   <style>
@@ -23,49 +23,46 @@
 </head>
 
 <body>
-  <!-- <div class="container">
 
-  </div> -->
-
-  <div class="outer">
+  <!-- <div class="outer">
     <div class="inner"></div>
-  </div>
-
-  <!-- <input type='text' value='' class='inputTest'/> -->
-  <!-- <script src='./js/prototype.js'></script> -->
-
-  <!-- <script src='./js/debouce.js' ></script> -->
-  <!-- <script src='./js/call.js'></script> -->
-  <!-- <script src='./js/apply.js'></script> -->
-  <!-- <script src='./js/bind.js'></script> -->
-  <!-- <script src='./js/args.js'></script> -->
-  <!-- <script src='./js/throttle.js'></script> -->
-  <!-- <script src='./js/arrUnique.js'></script> -->
-  <!-- <script src='./js/arrayFlat.js'></script> -->
-  <!-- <script src='./js/copy.js'></script> -->
-  <!-- <script src='./js/lazyMan.js'></script> -->
+  </div> -->
+  <ul>控件</ul>
   <script>
-    let arr = [2, 4, 5, 6],
-      k = 2;
-    getKvalue(arr);
+    setTimeout(() => {
+      // 插入十万条数据
+      const total = 100000
+      // 一次插入 20 条，如果觉得性能不好就减少
+      const once = 20
+      // 渲染数据总共需要几次
+      const loopCount = total / once
+      let countOfRender = 0
+      let ul = document.querySelector("ul");
 
-    function getKvalue(arr) {
-      let max = Math.max(arr[0], arr[1]);
-      let second = Math.min(arr[0], arr[1]);
-
-      for (let i = 2; i < arr.length; i++) {
-
-        if (arr[i] > max) {
-          second = max;
-          max = arr[i];
-        } else if (arr[i] > second) {
-          second = arr[i];
+      function add() {
+        // 优化性能，插入不会造成回流
+        const fragment = document.createDocumentFragment();
+        for (let i = 0; i < once; i++) {
+          const li = document.createElement("li");
+          li.innerText = Math.floor(Math.random() * total);
+          fragment.appendChild(li);
         }
-
+        ul.appendChild(fragment);
+        countOfRender += 1;
+        loop();
       }
-    }
-    // console.log();
+
+      function loop() {
+        if (countOfRender < loopCount) {
+          window.requestAnimationFrame(add);
+        }
+      }
+      loop();
+    }, 0);
   </script>
+
+
+
 </body>
 
 </html>
