@@ -4,55 +4,55 @@
 */
 
 //时间戳
-function throttle(fn,wait){
+function throttle(fn, wait) {
   let prev = 0;
-  return function(){
+  return function () {
     let current = +new Date();
-    if(current - prev > wait){
-        fn.apply(this,arguments);
-        prev = +new Date();
+    if (current - prev > wait) {
+      fn.apply(this, arguments);
+      prev = +new Date();
     }
   }
 }
 
 //定时器
-function throttleTime(fn,wait){
+function throttleTime(fn, wait) {
   let timer;
-  return function(){
-    if(!timer){
-      timer = setTimeout( ()=>{
+  return function () {
+    if (!timer) {
+      timer = setTimeout(() => {
         timer = null;
-        fn.apply(this,arguments);
-      },wait)
+        fn.apply(this, arguments);
+      }, wait)
     }
   }
 }
 
-function throttleFina(fn,wait){
-  let timer,prev = 0;
+function throttleFina(fn, wait) {
+  let timer, prev = 0;
   let later = () => {
     prev = +new Date();
     timer = null;
-    fn.apply(this,arguments);
+    fn.apply(this, arguments);
   }
-  let throttled = function(){
+  let throttled = function () {
     let current = +new Date();
-    let hasTime = wait- (current - prev);
+    let hasTime = wait - (current - prev);
     //没有剩余时间或者改动系统时间
-    if(hasTime <=0 || hasTime > wait){
-      if(timer){
+    if (hasTime <= 0 || hasTime > wait) {
+      if (timer) {
         clearTimeout(timer);
         timer = null;
       }
 
       prev = current;
-      fn.apply(this,arguments);
-    }else if(!timer){
-      timer = setTimeout(later, hasTime );
+      fn.apply(this, arguments);
+    } else if (!timer) {
+      timer = setTimeout(later, hasTime);
     }
   }
 
-  throttled.cancel = function() {
+  throttled.cancel = function () {
     clearTimeout(timeout);
     prev = 0;
     timer = null;
@@ -61,37 +61,37 @@ function throttleFina(fn,wait){
   return throttled;
 }
 
-function throttleLast(fn,wait,opt){
-  let timer,prev, args,self;
+function throttleLast(fn, wait, opt) {
+  let timer, prev, args, self;
 
-  if(!opt) opt = {};
+  if (!opt) opt = {};
 
   let later = () => {
     prev = opt.leading === false ? 0 : new Date().getTime();
     timer = null;
-    fn.apply(self,args);
-    if(!timer)  args = self = null;
+    fn.apply(self, args);
+    if (!timer) args = self = null;
   }
 
-  let throttled = function(){
+  let throttled = function () {
     let current = new Date().getTime();
-    if(!prev && opt.leading === false) prev = current;
-    let hasTime = wait - ( current - prev);
+    if (!prev && opt.leading === false) prev = current;
+    let hasTime = wait - (current - prev);
     self = this, args = arguments;
-    if(hasTime <=0 || hasTime > wait){
-      if(timer){
+    if (hasTime <= 0 || hasTime > wait) {
+      if (timer) {
         clearTimeout(timer);
-        tiemr =null;
+        tiemr = null;
       }
 
       prev = current;
-      fn.apply(self,args);
-      if(!timer) self = args = null;
-    }else if( !timer && opt.trailing === false) {
-      timer = setTimeout( later, hasTime);
+      fn.apply(self, args);
+      if (!timer) self = args = null;
+    } else if (!timer && opt.trailing === false) {
+      timer = setTimeout(later, hasTime);
     }
   }
-  throttled.cancel = function() {
+  throttled.cancel = function () {
     clearTimeout(timeout);
     prev = 0;
     timer = null;
@@ -103,10 +103,13 @@ let count = 1;
 
 let div = document.querySelector('.container');
 
-console.log(div,'fff')
-function addAcount(e){ 
+console.log(div, 'fff')
+
+function addAcount(e) {
   console.log(count);
   div.innerHTML = count++;
 }
 
-div.onmousemove = throttleLast( addAcount,3000, {leading: false});
+div.onmousemove = throttleLast(addAcount, 3000, {
+  leading: false
+});
