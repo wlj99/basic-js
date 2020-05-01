@@ -1,25 +1,25 @@
-class Animail{
-  constructor(name){
+class Animail {
+  constructor(name) {
     this.name = name;
   }
-  eat(){
+  eat() {
     console.log(`the  ${this.name} is eating`)
   }
 }
 
-class Dog extends Animail{
-  constructor(name,food){
+class Dog extends Animail {
+  constructor(name, food) {
     super(name);
     this.food = food;
   }
-  smile(){
+  smile() {
     console.log(`the ${this.name} is eating ${this.food}`)
   }
 
 }
 let an = new Animail('mimi');
 an.eat();
-let dog = new Dog('dahuang','meat');
+let dog = new Dog('dahuang', 'meat');
 dog.smile();
 
 /* console.log(an.__proto__ === Animail.prototype);
@@ -78,6 +78,7 @@ console.log([...m]); */
 
 
 function P() {}
+
 var p1 = new P();
 P.prototype.age = 18;
 P.prototype = {
@@ -87,12 +88,12 @@ P.prototype = {
 P.prototype.num = 20;
 P.prototype.age = 20;
 // console.log(P.prototype);
-console.log(p1.__proto__ === P.prototype);//false
+console.log(p1.__proto__ === P.prototype); //false
 var p2 = new P();
-console.log(p2.__proto__ === P.prototype);//true
+console.log(p2.__proto__ === P.prototype); //true
 // console.log(P.prototype);
-/* 
-console.log(p1.name);//undefined
-console.log(p1.age, 'dd');//8
+
+console.log(p1.name); //undefined
+console.log(p1.age, 'dd'); //8
 console.log(p1.num); //undefined 
-console.log(p2.name);//zz */
+console.log(p2.name); //zz
