@@ -97,3 +97,35 @@ console.log(p1.name); //undefined
 console.log(p1.age, 'dd'); //8
 console.log(p1.num); //undefined 
 console.log(p2.name); //zz
+
+
+function setupHelp() {
+  let res = [];
+  for (var i = 0; i < 3; i++) {
+    res.push((function () {
+      return i;
+    })())
+  }
+  return res;
+}
+
+function factorial(num) {
+  if (num <= 1) {
+    return 1
+  } else {
+    return num * factorial(num - 1)
+  }
+}
+var anotherFactorial = factorial
+factorial = null
+anotherFactorial(4) // 报错 ，因为最好是return num* arguments.callee（num-1），arguments.callee指向当前执行函数，但是在严格模式下不能使用该属性也会报错，所以借助闭包来实现
+
+
+// 使用闭包实现递归
+function newFactorial = (function f(num) {
+  if (num < 1) {
+    return 1
+  } else {
+    return num * f(num - 1)
+  }
+}) //这样就没有问题了，实际上起作用的是闭包函数f，而不是外面的函数newFactorial
