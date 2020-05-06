@@ -21,25 +21,25 @@ LazyMan('Tony').eat('lunch').eat('dinner').sleepFirst(5).sleep(10).eat('junk foo
 // I am eating junk food */
 
 
-class LazyMan{
-  constructor(name){
+class LazyMan {
+  constructor(name) {
     this.name = name;
     this.taskArray = [];
     this.init();
   };
 
-  init(){
+  init() {
     console.log(`Hi I am ${this.name}`);
     setTimeout(() => {
       this.next();
     }, 0);
   };
 
-  eat(param){
+  eat(param) {
     let that = this;
-    let fn = (function (param){
-      
-      return function (){
+    let fn = (function (param) {
+
+      return function () {
         console.log(`I am eating ${param}`);
         that.next();
       }
@@ -49,14 +49,14 @@ class LazyMan{
     return this;
   };
 
-  sleep(timer){
+  sleep(timer) {
     let that = this;
     let fn = (function (param) {
-      return function (){
-        setTimeout( () => {
+      return function () {
+        setTimeout(() => {
           console.log(`等待了${param}秒...`)
           that.next();
-        },param)
+        }, param)
       }
     })(timer);
 
@@ -64,15 +64,15 @@ class LazyMan{
     return this;
   };
 
-  sleepFirst(timer){
+  sleepFirst(timer) {
 
     let that = this;
     let fn = (function (param) {
-      return function (){
-        setTimeout( () => {
+      return function () {
+        setTimeout(() => {
           console.log(`等待了${param}秒...`)
           that.next();
-        },param)
+        }, param)
       }
     })(timer);
 
@@ -80,7 +80,7 @@ class LazyMan{
     return this;
   };
 
-  next () {
+  next() {
     let fn = this.taskArray.shift();
     // console.log(fn);
     fn && fn();
@@ -95,7 +95,7 @@ class LazyManClass {
     console.log(`Hi I am ${name}`)
     setTimeout(() => {
       this.next()
-    },0)
+    }, 0)
   }
 
   sleepFirst(time) {
@@ -114,7 +114,7 @@ class LazyManClass {
       setTimeout(() => {
         console.log(`等待了${time}秒...`)
         this.next()
-      },time)
+      }, time)
     }
     this.queue.push(fn)
     return this
@@ -154,61 +154,64 @@ function LazyManNew2(name) {
 
 // 给定 nums1 = [1, 2, 2, 1]，nums2 = [2, 2]，返回 [2, 2]。
 
-function  differ(a,b){
+function differ(a, b) {
   let temp = a.length >= b.length ? a : b;
-   return temp.filter( item => {
+  return temp.filter(item => {
     return b.indexOf(item);
   })
 }
 
 
-let nums1 = [1, 2, 2, 1],nums2 = [2, 2];
+let nums1 = [1, 2, 2, 1],
+  nums2 = [2, 2];
 
 // console.log(differ(nums1, nums2));
 
 /* var a={}, b='123', c=123;  
 a[b]='b';
 a[c]='c';  
-console.log(a[b]);
+console.log(a[b]); // 'c'
 
 // example 2
 var a={}, b=Symbol('123'), c=Symbol('123');  
 a[b]='b';
 a[c]='c';  
-console.log(a[b]);
+console.log(a[b]); // 'b'
 // example 3
 var a={}, b={key:'123'}, c={key:'456'};  
 a[b]='b';
 a[c]='c';  
-console.log(a[b]); */
+console.log(a[b]);// 'c' */
 
-function rever(arr,len){
-  while(len > 0){
+function rever(arr, len) {
+  while (len > 0) {
     let temp = arr.pop();
     // console.log(temp ,arr);
     arr.unshift(temp);
     // console.log(temp ,arr);
-    len --;
+    len--;
   }
   return arr;
 }
 
-let t = [1, 2, 3, 4, 5, 6, 7], k = 3;
+let t = [1, 2, 3, 4, 5, 6, 7],
+  k = 3;
 // console.log(rever(t,k));
 
-function add(...args){
+function add(...args) {
   let sum = 0;
-  args.forEach( item => sum += item );
-  function next(...args) { 
-    args.forEach( item => sum += item );
+  args.forEach(item => sum += item);
+
+  function next(...args) {
+    args.forEach(item => sum += item);
     return next;
-   }
+  }
 
-   next.toString = function () {
-     return sum;
-   }
+  next.toString = function () {
+    return sum;
+  }
 
-   return next;
+  return next;
 }
 
 /* console.log(add(1)); 	// 1
@@ -218,19 +221,20 @@ console.log(add(1)(2, 3));   // 6
 console.log(add(1, 2)(3));   // 6
 console.log(add(1, 2, 3)); */
 
-function hasTarget(obj,target){
+function hasTarget(obj, target) {
   let res = {};
   let len = obj.length;
-  for(let i=0;i<len;i++){
+  for (let i = 0; i < len; i++) {
     let red = target - obj[i];
-    if(i !== 0 || res[ obj[i]]){
-        return [res[obj[i]], i];
+    if (i !== 0 || res[obj[i]]) {
+      return [res[obj[i]], i];
     }
     res[red] = i;
   }
 }
 
-let nums = [2, 7, 11, 15], target = 9;
+let nums = [2, 7, 11, 15],
+  target = 9;
 // console.log(hasTarget(nums,target));
 
 
@@ -241,44 +245,75 @@ const convert = list => {
     map.set(el.id, el);
   });
   list.forEach(el => {
-		let parent = map.get(el.parentId);
-		if (!parent) {
-			// parentId === 0
-			el.children = []
-			return 
-		}
+    let parent = map.get(el.parentId);
+    if (!parent) {
+      // parentId === 0
+      el.children = []
+      return
+    }
     if (parent.hasOwnProperty('children')) {
       parent.children.push(el);
     } else {
       parent['children'] = [];
       parent.children.push(el);
     }
-	});
-	for (let i = 0; i < list.length; i++) {
-		const el = list[i];
-		if (el.parentId === 0) {
-			result.push(el)
-		}
-	}
-	return result
+  });
+  for (let i = 0; i < list.length; i++) {
+    const el = list[i];
+    if (el.parentId === 0) {
+      result.push(el)
+    }
+  }
+  return result
 };
-let list = [
-  { id: 1, name: '部门A', parentId: 0 },
-  { id: 2, name: '部门B', parentId: 0 },
-  { id: 3, name: '部门C', parentId: 1 },
-  { id: 4, name: '部门D', parentId: 1 },
-  { id: 5, name: '部门E', parentId: 2 },
-  { id: 6, name: '部门F', parentId: 3 },
-  { id: 7, name: '部门G', parentId: 2 },
-  { id: 8, name: '部门H', parentId: 4 }
+let list = [{
+    id: 1,
+    name: '部门A',
+    parentId: 0
+  },
+  {
+    id: 2,
+    name: '部门B',
+    parentId: 0
+  },
+  {
+    id: 3,
+    name: '部门C',
+    parentId: 1
+  },
+  {
+    id: 4,
+    name: '部门D',
+    parentId: 1
+  },
+  {
+    id: 5,
+    name: '部门E',
+    parentId: 2
+  },
+  {
+    id: 6,
+    name: '部门F',
+    parentId: 3
+  },
+  {
+    id: 7,
+    name: '部门G',
+    parentId: 2
+  },
+  {
+    id: 8,
+    name: '部门H',
+    parentId: 4
+  }
 ];
 // console.dir(convert(list));
 
-function revese(str){
-  if(str.length < 2 ){
+function revese(str) {
+  if (str.length < 2) {
     return str;
-  }else {
-    return str.toString().slice(-1) + revese(str.toString().slice(0, - 1));
+  } else {
+    return str.toString().slice(-1) + revese(str.toString().slice(0, -1));
   }
 
 }
@@ -296,25 +331,25 @@ for(var i = 0; i < 100; i++){
 }
  */
 
- function getArr(str,target){
-   if(!str || !target )  return;
-   let idx  = str.indexOf(target);
-   let res = [];
-   console.log(idx);
-   if(idx){
-     let temp = str.slice(idx,-1);
-     console.log(temp);
-     temp = temp.split('&')[0].split('=')[1];
-     if(temp){
-       temp = temp.split(',');
-        res = [...temp];
-     }
+function getArr(str, target) {
+  if (!str || !target) return;
+  let idx = str.indexOf(target);
+  let res = [];
+  console.log(idx);
+  if (idx) {
+    let temp = str.slice(idx, -1);
+    console.log(temp);
+    temp = temp.split('&')[0].split('=')[1];
+    if (temp) {
+      temp = temp.split(',');
+      res = [...temp];
+    }
 
-   }
-   return res;
- }
+  }
+  return res;
+}
 
 //  let href = 'https://www.xx.cn/api?keyword=&level1=&local_batch_id=&elective=&local_province_id=33';
 //  let href = 'https://www.xx.cn/api?keyword=&level1=&local_batch_id=&elective=800&local_province_id=33';
 let href = 'https://www.xx.cn/api?keyword=&level1=&local_batch_id=&elective=800,700&local_province_id=33';
- console.log(getArr(href,'elective'));
+console.log(getArr(href, 'elective'));
