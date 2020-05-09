@@ -1,16 +1,121 @@
-html,body{
+html,
+body {
   width: 100%;
   height: 100%;
-  margin:0;
-  padding:0;
+  margin: 0;
+  padding: 0;
+  background: #000;
 }
 
-.container{
-  width:100%;
-  height:100%;
+.container {
+  width: 100%;
+  height: 100%;
   text-align: center;
-  color:white;
+  color: white;
   background-color: black;
-  font-size:32px;
+  font-size: 32px;
   margin: auto;
+}
+
+.flex {
+  display: flex;
+  height: 100px;
+  background-color: red;
+}
+
+
+.left {
+  width: 100px;
+  height: 50px;
+  margin: 10px;
+  border: 5px solid #123;
+  padding: 20px;
+  background-color: yellow;
+}
+
+.right {
+  width: 100px;
+  height: 50px;
+  margin: 10px;
+  border: 5px solid #234;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: greenyellow;
+}
+
+
+div {
+  width: 100px;
+  height: 50px;
+  background: red;
+  color: white;
+  font-weight: bold;
+  position: relative;
+  animation: mymove 5s infinite;
+  -webkit-animation: mymove 5s infinite;
+  /* Safari and Chrome */
+}
+
+#div1 {
+  animation-timing-function: cubic-bezier(0, 0, 0.25, 1);
+}
+
+#div2 {
+  animation-timing-function: cubic-bezier(0.98, 0.74, 0.45, 0.01);
+}
+
+#div3 {
+  animation-timing-function: cubic-bezier(0.42, 0, 1, 1);
+}
+
+#div4 {
+  animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
+}
+
+#div5 {
+  animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+}
+
+/* Safari and Chrome: */
+#div1 {
+  -webkit-animation-timing-function: cubic-bezier(0, 0, 1, 1);
+}
+
+#div2 {
+  -webkit-animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+#div3 {
+  -webkit-animation-timing-function: cubic-bezier(0.42, 0, 1, 1);
+}
+
+#div4 {
+  -webkit-animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
+}
+
+#div5 {
+  -webkit-animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+}
+
+@keyframes mymove {
+  from {
+    left: 0px;
+  }
+
+  to {
+    left: 300px;
+  }
+}
+
+@-webkit-keyframes mymove
+
+/* Safari and Chrome */
+  {
+  from {
+    left: 0px;
+  }
+
+  to {
+    left: 300px;
+  }
 }

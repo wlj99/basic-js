@@ -142,6 +142,17 @@ function foo() {
 }
 
 foo().fn();
+
+function foo() {
+  let a = {
+    num: 0,
+    fn: function () {
+      console.log("first", this);
+    },
+  };
+  return a;
+}
+let a = foo().fn();
 ```
 
 > 注意 ⚠️ 箭头函数的 this 一旦被绑定，就不会再被任何方式所改变
