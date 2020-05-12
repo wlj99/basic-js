@@ -32,13 +32,20 @@
     <div class="right"></div>
   </div> -->
 
-  <p><strong>注释：</strong>Internet Explorer 9 以及更早的版本不支持 animation-timing-function 属性。</p>
+  <!-- <p><strong>注释：</strong>Internet Explorer 9 以及更早的版本不支持 animation-timing-function 属性。</p>
 
   <div id="div1">linear</div>
   <div id="div2">ease</div>
   <div id="div3">ease-in</div>
   <div id="div4">ease-out</div>
-  <div id="div5">ease-in-out</div>
+  <div id="div5">ease-in-out</div> -->
+
+  <!-- <span id="name"></span> -->
+
+  <div>
+    name: <input id="name" />
+    age: <input id="age" />
+  </div>
   <!--  -->
   <!-- <ul>控件</ul> -->
   <script>
@@ -74,6 +81,56 @@
     }, 0); */
   </script>
 
+  <script>
+    /* var data = {
+      name: ''
+    };
+    // Data Bindings
+    Object.defineProperty(data, 'name', {
+      get: function () {},
+      set: function (newValue) {
+        // 页面响应处理
+        document.getElementById('name').innerText = newValue
+        data.name = value
+      },
+      enumerable: true,
+      configurable: true
+    });
+    // 页面DOM listener
+    document.getElementById('name').onchange = function (e) {
+      data.name = e.target.value;
+    } */
+  </script>
+  <script>
+    let data = {
+      name: '',
+      age: 0
+    }
+
+    // 暴露到外部，便于查看效果
+    window.data = data;
+    window.myProxy = new Proxy(data, {
+      set(target, propKey, value) {
+        // 改变数据Model时修改页面
+        console.log(value, '-----');
+        if (propKey === 'name') {
+          document.getElementById('name').value = value;
+        } else if (propKey === 'age') {
+          document.getElementById('age').value = value;
+        }
+        Reflect.set(...arguments);
+      },
+    });
+
+    // 页面变化改变Model内数据
+    document.getElementById('name').onchange = function (e) {
+      console.log(data, myProxy, e);
+      Reflect.set(data, 'name', e.target.value);
+    }
+    document.getElementById('age').onchange = function (e) {
+      Reflect.set(myProxy, 'age', e.target.value);
+    }
+  </script>
 
 
 </body>

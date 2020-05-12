@@ -17,6 +17,12 @@ function repliceStr(str) {
 let str = 'get1_install2_app3_list4_by5_android6';
 console.log(repliceStr(str));
 
+
+function repliceStr(str) {
+  let res = str.match(/[a-z]\d+/)
+}
+
+
 function setArray() {
   let arr = [];
   let i = 0;

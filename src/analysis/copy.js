@@ -10,51 +10,51 @@
 */
 
 //浅拷贝
-function shallowCopy(obj){
-  if(typeof obj !== 'object') return obj;
-  let  newObj = obj instanceof Array  ? [] :{};
-  for(let key in obj ){
-    if( obj.hasOwnProperty(key)) newObj[key] = obj[key];
-  } 
+function shallowCopy(obj) {
+  if (typeof obj !== 'object') return obj;
+  let newObj = obj instanceof Array ? [] : {};
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) newObj[key] = obj[key];
+  }
   return newObj;
 }
 
 //深拷贝
 //方案一:JSON.parse( JSON.stringify( source) )可以拷贝对象/数组（简单粗暴，不能拷贝函数）
 let source = {
-  a:{
-    b:1
+  a: {
+    b: 1
   }
 }
-let cp = JSON.parse( JSON.stringify( source) );
+let cp = JSON.parse(JSON.stringify(source));
 cp.a.b = 100;
-console.log(source,cp);
+console.log(source, cp);
 
 //方案二：递归拷贝
-function deepClone(obj){
-  if(obj === null || typeof obj !== 'object') return obj;
+function deepClone(obj) {
+  if (obj === null || typeof obj !== 'object') return obj;
   let res = obj instanceof Array ? [] : {};
-  for(let key in obj){
-    if(obj.hasOwnProperty(key)){
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
       let temp = obj[key];
-      res[key] = typeof temp === 'object' ? deepClone(temp): temp;
+      res[key] = typeof temp === 'object' ? deepClone(temp) : temp;
     }
   }
   return res;
 }
 
 let arr = [
-  function a(){
+  function a() {
     console.log('aaaa');
   },
-  function b(){
+  function b() {
     console.log('bbbb')
   }
 ]
 
-console.log(JSON.parse(JSON.stringify(arr)));//[null,null]
-let arr2 = deepClone(arr);//[ a() ,b()]
-arr2[0] = function c(){
+console.log(JSON.parse(JSON.stringify(arr))); //[null,null]
+let arr2 = deepClone(arr); //[ a() ,b()]
+arr2[0] = function c() {
   console.log('ccccc');
 }
-console.log(arr2,arr);// [c(), b()] ,[ a() ,b()]
+console.log(arr2, arr); // [c(), b()] ,[ a() ,b()]

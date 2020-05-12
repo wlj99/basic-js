@@ -4,7 +4,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background: #000;
+  /* background: #000; */
 }
 
 .container {
@@ -44,7 +44,7 @@ body {
 }
 
 
-div {
+/* div {
   width: 100px;
   height: 50px;
   background: red;
@@ -53,8 +53,8 @@ div {
   position: relative;
   animation: mymove 5s infinite;
   -webkit-animation: mymove 5s infinite;
-  /* Safari and Chrome */
-}
+  /* Safari and Chrome 
+} */
 
 #div1 {
   animation-timing-function: cubic-bezier(0, 0, 0.25, 1);
