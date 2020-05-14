@@ -219,6 +219,18 @@ function flatten2(arr) {
   return arr;
 }
 
+function flat1(arr) {
+  let result = []
+  arr.forEach(element => {
+    if (Array.isArray(element)) {
+      result = result.concat(flat1(element))
+    } else {
+      result.push(element)
+    }
+  });
+  return result
+}
+
 
 let arr = [1, [2, [3, 4]],
   [5, 6]

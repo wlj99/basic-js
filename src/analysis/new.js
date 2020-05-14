@@ -17,7 +17,7 @@ function newOperator(ctor, ...args) {
   return isObect || isFunction ? res : obj;
 };
 
-// 模拟 Object.create
+// Object.create
 function create(proto) {
   function F() {}
   F.prototype = proto;
