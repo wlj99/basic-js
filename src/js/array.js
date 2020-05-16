@@ -235,7 +235,24 @@ function flat1(arr) {
 let arr = [1, [2, [3, 4]],
   [5, 6]
 ];
-console.log(flatten2(arr))
+console.log(flatten2(arr));
+
+function deepFlatten(arr) {
+  let result = [];
+
+  function recursive(innerArr) {
+    innerArr.forEach((v, i) => {
+      if (Array.isArray(v)) {
+        recursive(v);
+      } else {
+        result.push(v);
+      }
+    });
+  }
+  recursive(arr);
+  return result;
+}
+console.log(deepFlatten(arr));
 
 
 //数组去重
@@ -270,3 +287,27 @@ function sortArr(a, b) {
 
 let arr = [1, 6, 45, 6, 7, 8];
 console.log(unique(arr));
+
+
+// 未排序数组中连续的最长数组输出
+const fn = (arr) => {
+  let maxLen = 1
+  let tempLen = 1
+  let lastIndex
+  let arrInOrder = [...new Set(arr.sort((a, b) => a - b))]
+  for (let i = 1, len = arrInOrder.length; i < len; i++) {
+    if (arrInOrder[i] - arrInOrder[i - 1] === 1) {
+      tempLen += 1
+      if (tempLen > maxLen) {
+        maxLen = tempLen
+        lastIndex = i
+      }
+    } else {
+      tempLen = 1
+    }
+  }
+  return arrInOrder[lastIndex - maxLen + 1] + '-->' + arrInOrder[lastIndex]
+}
+
+const arr = [1, 11, 2, 30, 6, 8, 7, 9, 10]
+console.log(fn(arr)) //6-->11

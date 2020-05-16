@@ -17,6 +17,16 @@ function repliceStr(str) {
 let str = 'get1_install2_app3_list4_by5_android6';
 console.log(repliceStr(str));
 
+/* function replaceStr(str) {
+  let res = str.replace(/([a-z])+(0-9)(\_?)/g, function (str) {
+    console.log(str);
+    let last = str.slice(-2, -1);
+    return last % 2 === 0 ? str.slice(0, -2) + last : str.slice(0, -2)
+
+  })
+  console.log(res);
+} */
+
 
 function repliceStr(str) {
   let res = str.match(/[a-z]\d+/)
