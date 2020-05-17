@@ -199,37 +199,7 @@ const maxSubArray = function (nums) {
 };
 maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]);
 
-//数组扁平化 
-function flat(arr) {
-  let res = arr.toString().replace('/\[+\]+/g', '');
-  return res.split(',');
-}
 
-function flatten(arr) {
-  return arr.reduce(function (prev, next) {
-    return prev.concat(Array.isArray(next) ? flatten(next) : next)
-  }, [])
-}
-
-function flatten2(arr) {
-  while (arr.some(item => Array.isArray(item))) {
-    console.log(arr);
-    arr = [].concat(...arr);
-  }
-  return arr;
-}
-
-function flat1(arr) {
-  let result = []
-  arr.forEach(element => {
-    if (Array.isArray(element)) {
-      result = result.concat(flat1(element))
-    } else {
-      result.push(element)
-    }
-  });
-  return result
-}
 
 
 let arr = [1, [2, [3, 4]],

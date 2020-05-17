@@ -61,6 +61,7 @@ function throttleFina(fn, wait) {
   return throttled;
 }
 
+// leading 代表首次是否执行，trailing 代表结束后是否再执行一次
 function throttleLast(fn, wait, opt) {
   let timer, prev, args, self;
 
