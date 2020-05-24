@@ -5,6 +5,7 @@
 overflow: hidden;
 text-overflow: ellipsis;
 white-space: nowrap;
+
 /* 多行： */
 display: -webkit-box;
 -webkit-box-orient: vertical;

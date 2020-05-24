@@ -5,7 +5,7 @@ Function.prototype.bind2 = function (context) {
   return function () {
 
     // let bindArgs = Array.prototype.slice.call(arguments);
-    return self.apply(context, ...args, arguments);
+    return self.apply(context, [...args, arguments]);
     // return self.apply(context,args1.concat(bindArgs));
   }
 }

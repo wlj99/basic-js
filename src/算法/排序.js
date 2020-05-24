@@ -40,15 +40,12 @@ function quickSort(arr) {
   let len = arr.length;
   if (len <= 1) return arr;
   let basic = len / 2 | 0;
-  console.log(basic, 'basic');
   const basicValue = arr.splice(basic, 1)[0];
-  console.log(basicValue, 'basicValue');
   let left = [];
   let right = [];
   arr.forEach(item => {
     item > basicValue ? right.push(item) : left.push(item);
   });
-  console.log(left, right);
 
   return [...quickSort(left), basicValue, ...quickSort(right)];
 }

@@ -8,7 +8,7 @@
 
   <title>Document</title>
   <style>
-    .outer {
+    /* .outer {
       width: 300px;
       height: 300px;
       background-color: pink;
@@ -18,11 +18,153 @@
       width: 200px;
       height: 200px;
       background-color: red;
+    } */
+    html {
+      /* width: 100%; */
+      height: 100%;
+      background-color: red;
+    }
+
+    .con {
+      background-color: yellow;
+      height: 100%;
+      display: flex;
+
+    }
+
+    .child {
+      width: 100%;
+      height: 100%;
+      background-color: pink;
+    }
+
+    .first {
+      background-color: blue;
+      width: 100px;
+      height: 100px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .second {
+      background-color: aquamarine;
+      position: relative;
+      width: 100px;
+      height: 100px;
+      z-index: 12;
+      top: 50px;
+    }
+
+    div {
+      position: relative;
+      width: 100px;
+      height: 100px;
+    }
+
+    p {
+      position: absolute;
+      font-size: 20px;
+      width: 100px;
+      height: 100px;
+    }
+
+    .a {
+      background-color: blue;
+      z-index: 1;
+    }
+
+    .b {
+      background-color: green;
+      z-index: 2;
+      top: 20px;
+      left: 20px;
+    }
+
+    .c {
+      background-color: red;
+      z-index: 3;
+      top: -20px;
+      left: 40px;
+    }
+
+    .test {
+      background-color: white;
+      display: flex;
+    }
+
+    .h1-s {
+      background-color: blue;
+    }
+
+    h1:first-child {
+      background-color: yellow;
+    }
+
+    h1:nth-child(even) {
+      background-color: pink;
+      /* 偶数 */
+    }
+
+    h1:nth-child(odd) {
+      background-color: green;
+      /* 基数 */
+    }
+
+
+    .box {
+      /* position: relative; */
+      /* z-index: auto; */
+    }
+
+    .parent {
+      width: 200px;
+      height: 100px;
+      background: #168bf5;
+      /* 虽然设置了z-index，但是没有设置position，z-index无效，.parent还是普通元素，没有产生层叠上下文 */
+      z-index: 1;
+    }
+
+    .child {
+      width: 100px;
+      height: 200px;
+      background: #32d19c;
+      position: relative;
+      z-index: -1;
     }
   </style>
+
 </head>
 
 <body>
+  <!-- <div class='test'>
+    <h1 class='h1-s'>11</h1>
+    <h1 class='h1-s'>22</h1>
+    <h1 class='h1-s'>22</h1>
+    <h1 class='h1-s'>22</h1>
+    <h1 class='h1-s'>22</h1>
+    <h1 class='h1-s'>22</h1>
+  </div> -->
+  <div class="box">
+    <div class="parent">
+      parent
+      <div class="child">child</div>
+    </div>
+  </div>
+  <!-- <div class='con'>
+    <div class="child"></div>
+  </div> -->
+
+  <!-- <div class="first"></div>
+  <div class="second"></div> -->
+  <!-- <div>
+    <p class="a">a</p>
+    <p class="b">b</p>
+  </div>
+
+  <div>
+    <p class="c">c</p>
+  </div> -->
+
 
   <!-- <div class="outer">
     <div class="inner"></div>

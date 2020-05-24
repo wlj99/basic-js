@@ -222,6 +222,9 @@ function deepFlatten(arr) {
   recursive(arr);
   return result;
 }
+let arr = [1, [2, [3, 4]],
+  [5, 6]
+];
 console.log(deepFlatten(arr));
 
 
@@ -281,3 +284,77 @@ const fn = (arr) => {
 
 const arr = [1, 11, 2, 30, 6, 8, 7, 9, 10]
 console.log(fn(arr)) //6-->11
+
+
+
+function quickSort(arr, left, right) { //这个left和right代表分区后“新数组”的区间下标，因为这里没有新开数组，所以需要left/right来确认新数组的位置
+  if (left < right) {
+    let pos = left - 1 //pos即“被置换的位置”，第一趟为-1
+    for (let i = left; i <= right; i++) { //循环遍历数组，置换元素
+      let pivot = arr[right] //选取数组最后一位作为基准数，
+      if (arr[i] <= pivot) { //若小于等于基准数，pos++，并置换元素, 这里使用小于等于而不是小于, 其实是为了避免因为重复数据而进入死循环
+        pos++
+        console.log(arr[i], pivot, pos);
+        let temp = arr[pos]
+        arr[pos] = arr[i]
+        arr[i] = temp
+      }
+    }
+    //一趟排序完成后，pos位置即基准数的位置，以pos的位置分割数组
+    quickSort(arr, left, pos - 1)
+    quickSort(arr, pos + 1, right)
+  }
+  return arr //数组只包含1或0个元素时(即left>=right)，递归终止
+}
+
+//使用
+var arr = [5, 1, 4, 2, 3]
+var start = 0;
+var end = arr.length - 1;
+quickSort(arr, start, end);
+
+
+const heapSort = array => {
+  // 我们用数组来储存这个大根堆,数组就是堆本身
+  // 初始化大顶堆，从第一个非叶子结点开始
+  for (let i = Math.floor(array.length / 2 - 1); i >= 0; i--) {
+    heapify(array, i, array.length);
+  }
+  // 排序，每一次 for 循环找出一个当前最大值，数组长度减一
+  for (let i = Math.floor(array.length - 1); i > 0; i--) {
+    // 根节点与最后一个节点交换
+    swap(array, 0, i);
+    // 从根节点开始调整，并且最后一个结点已经为当前最大值，不需要再参与比较，所以第三个参数为 i，即比较到最后一个结点前一个即可
+    heapify(array, 0, i);
+  }
+  return array;
+};
+
+// 交换两个节点
+const swap = (array, i, j) => {
+  let temp = array[i];
+  array[i] = array[j];
+  array[j] = temp;
+};
+
+// 将 i 结点以下的堆整理为大顶堆，注意这一步实现的基础实际上是：
+// 假设结点 i 以下的子堆已经是一个大顶堆，heapify 函数实现的
+// 功能是实际上是：找到 结点 i 在包括结点 i 的堆中的正确位置。
+// 后面将写一个 for 循环，从第一个非叶子结点开始，对每一个非叶子结点
+// 都执行 heapify 操作，所以就满足了结点 i 以下的子堆已经是一大顶堆
+const heapify = (array, i, length) => {
+  let temp = array[i]; // 当前父节点
+  // j < length 的目的是对结点 i 以下的结点全部做顺序调整
+  for (let j = 2 * i + 1; j < length; j = 2 * j + 1) {
+    temp = array[i]; // 将 array[i] 取出，整个过程相当于找到 array[i] 应处于的位置
+    if (j + 1 < length && array[j] < array[j + 1]) {
+      j++; // 找到两个孩子中较大的一个，再与父节点比较
+    }
+    if (temp < array[j]) {
+      swap(array, i, j); // 如果父节点小于子节点:交换；否则跳出
+      i = j; // 交换后，temp 的下标变为 j
+    } else {
+      break;
+    }
+  }
+}

@@ -14,6 +14,131 @@
     <button v-on:click="sayHi">change model</button>
   </div>
   <script>
+    // 极简绑定
+    const obj = {};
+    Object.defineProperty(obj, 'text', {
+      get: function () {
+        console.log('get val');
+      },
+      set: function (newVal) {
+        console.log('set val:' + newVal);
+        document.getElementById('input').value = newVal;
+        document.getElementById('span').innerHTML = newVal;
+      }
+    });
+
+    const input = document.getElementById('input');
+    input.addEventListener('keyup', function (e) {
+      obj.text = e.target.value;
+    })
+    let uid = 0;
+    class Dep {
+      constructor() {
+        this.uid++;
+        this.subs = [];
+      }
+
+      deepend() {
+        Dep.target.addDep(this);
+      }
+
+      addDep(sub) {
+        this.subs.push(sub);
+      }
+
+      notify() {
+        this.subs.forEach(item => {
+          item.update();
+        })
+      }
+    }
+    Dep.target = null;
+
+
+
+    class Observer {
+      constructor(value) {
+        this.value = value;
+        this.walk(value)
+      }
+
+      walk(value) {
+        Object.keys(value).forEach(key => {
+          this.convert(key, value[key]);
+        })
+      }
+
+      conver(key, val) {
+        defineReactive(this.value, key, val);
+      }
+    }
+
+
+    function defineReactive(obj, key, val) {
+      const dep = new Dep();
+      let childObj = observe(val);
+      Object.defineProperty(obj, key, {
+        enumerable: true,
+        configurable: true,
+        get: () => {
+          if (Dep.target) {
+            dep.depend();
+          }
+          return val;
+        },
+        set: (newVal) => {
+          if (newVal === val) return;
+          val = newVal;
+          chlidOb = observe(newVal);
+          dep.notify();
+        }
+      })
+    }
+
+    function observe(val) {
+      if (!val || typeof val !== 'object') return;
+      return new Observe(val);
+    }
+
+
+
+    class Watcher {
+      constructor(vm, expOrFn, cb) {
+        this.depIds = {};
+        this.vm = vm;
+        this.cb = cb;
+        this.expOrFn = expOrFn;
+        this.val = this.get();
+      }
+
+      update() {
+        this.run();
+      }
+
+      addDep(dep) {
+        if (!this.depIds.hasOwnProperty(dep.id)) {
+          dep.addSub(this);
+          this.depIds[dep.id] = dep;
+        }
+      }
+
+      run() {
+        const val = this.get();
+        if (val !== this.val) {
+          this.val = val;
+          this.cb.call(this.vm, val);
+        }
+      }
+
+      get() {
+        Dep.target = this;
+        const val = this.vm._data[this.expOrFn];
+        Dep.target = null;
+        return val;
+      }
+    }
+  </script>
+  <script>
     function defineReactive(obj, key, val) {
       // 递归子属性
       observe(val)

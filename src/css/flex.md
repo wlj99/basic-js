@@ -2,6 +2,14 @@
 
 ## 容器的属性
 
+```css
+div {
+  display: flex;
+}
+```
+
+设为 Flex 布局以后，子元素的 float、clear 和 vertical-align 属性将失效
+
 flex-direction: row | row-reverse | column | column-reverse;
 flex-wrap: nowrap | wrap | wrap-reverse;
 
