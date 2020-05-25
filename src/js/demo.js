@@ -1,4 +1,3 @@
-
 /* function Par(fn){
   return function (val) {
     return fn(val);
@@ -67,25 +66,25 @@ var inner = document.querySelector('.inner');
 
 // Let's listen for attribute changes on the
 // outer element
-new MutationObserver(function() {
-console.log('mutate');
+new MutationObserver(function () {
+  console.log('mutate');
 }).observe(outer, {
-attributes: true
+  attributes: true
 });
 
 // Here's a click listener…
 function onClick() {
-console.log('click');
+  console.log('click');
 
-setTimeout(function() {
-console.log('timeout');
-}, 0);
+  setTimeout(function () {
+    console.log('timeout');
+  }, 0);
 
-Promise.resolve().then(function() {
-console.log('promise');
-});
+  Promise.resolve().then(function () {
+    console.log('promise');
+  });
 
-outer.setAttribute('data-random', Math.random());
+  outer.setAttribute('data-random', Math.random());
 }
 
 // …which we'll attach to both elements
@@ -201,16 +200,28 @@ obj.push(2)
 console.log(obj) */
 
 console.time();
-let data = {1:222, 2:123, 5:888};
-let arr = Array.from({length:12}).map((it,i)=> data[i+1]||null);
+let data = {
+  1: 222,
+  2: 123,
+  5: 888
+};
+let arr = Array.from({
+  length: 12
+}).map((it, i) => data[i + 1] || null);
 console.log(arr);
 // default: 2.119873046875ms
 console.timeEnd();
 
 console.time()
-let obj = {1:222, 2:123, 5:888};
-let res = Array.from({length:12}).fill(null);
-Object.keys(obj).forEach(it=>res[it-1] = obj[it]);
+let obj = {
+  1: 222,
+  2: 123,
+  5: 888
+};
+let res = Array.from({
+  length: 12
+}).fill(null);
+Object.keys(obj).forEach(it => res[it - 1] = obj[it]);
 console.log(res);
 // default: 0.7451171875ms
 console.timeEnd();

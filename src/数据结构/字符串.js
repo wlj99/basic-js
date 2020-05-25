@@ -43,6 +43,7 @@ function samePrefix(strArr) {
   }
   return second;
 }
+console.log(samePrefix(['pwe', 'pw', 'pdddd']));
 
 // 无重复字符的最长子串个数
 
@@ -53,7 +54,7 @@ function noRepeat(str) {
   for (let i = 0; i < len; i++) {
     let idx = arr.indexOf(str[i]);
     if (idx !== -1) {
-      arr.splice(0, inex + 1);
+      arr.splice(0, idx + 1);
     }
     arr.push(str.charAt(i));
     max = Math.max(arr.length, max);
@@ -110,3 +111,24 @@ function addNum(str1, str2) {
   if (point) res = 1 + res;
   return res;
 }
+
+function addNum(str1, str2) {
+  let stack1 = str1.split(''),
+    stack2 = str2.split(''),
+    point = 0;
+  res = '';
+  while (stack1.length || stack2.length) {
+    let temp1 = stack1.pop();
+    let temp2 = stack2.pop();
+    temp1 = temp1 !== undefined ? temp1 : 0;
+    temp2 = temp2 !== undefined ? temp2 : 0;
+    console.log(temp1, temp2, point);
+    point = Number(temp1) + Number(temp2) + Number(point);
+    console.log(point, 'point');
+    res = point % 10 + res;
+    point = point > 9 ? 1 : 0;
+  }
+  if (point) res = 1 + res;
+  return res;
+}
+console.log(addNum('123', '81'));

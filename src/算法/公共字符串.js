@@ -7,7 +7,6 @@ function sameStr(str) {
       if (str[i].charAt(j) !== start.charAt(j)) {
         break;
       }
-
     }
     start = start.substring(0, j);
   }

@@ -4,7 +4,7 @@ class EventEmiter {
   }
 
   on(type, cb) {
-    if (!this.events) this.events = Object.create(null);
+    // if (!this.events) this.events = Object.create(null);
 
     if (!this.events[type]) {
       this.events[type] = [cb];

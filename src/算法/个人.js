@@ -117,8 +117,8 @@ function listSum(l1, l2) {
 function add(num1, num2) {
   let first = (num1 || '').split('');
   let second = (num2 || '').split('');
-  let indexA = first.length;
-  let indexB = seconde.length;
+  let indexA = first.length - 1;
+  let indexB = seconde.length - 1;
   let point = 0;
   let res = [];
   while (indexA || indexB) {
@@ -194,10 +194,10 @@ console.log(flagObj(entry));
 
 /* 对象还原 */
 function buildObj(obj) {
-  let res = {};
+  let result = {};
   Object.keys(obj).forEach(key => {
     let arr = item.split('.');
-
+    let res = result;
     while (arr.length !== 0) {
       let item = arr.shift();
       if (!res.hasOwnProperty(item)) {
@@ -207,7 +207,7 @@ function buildObj(obj) {
     }
   })
 
-  return res;
+  return result;
 }
 
 function deepCloneObjArr(obj) {
@@ -219,6 +219,7 @@ function deepCloneObjArr(obj) {
       res[key] = typeof obj[key] === 'object' ? deepCloneObjArr(temp) : temp;
     }
   }
+  return res;
 }
 
 
@@ -332,7 +333,7 @@ LRUCache.prototype.put = function (key, value) {
   this.cache.set(key, value)
 }
 
-
+// 只是单纯把后面的元素复制到第一个数组的后面 并没有考虑排序
 var merge = function (nums1, m, nums2, n) {
   let length = m + n
   while (n > 0) {
@@ -342,4 +343,7 @@ var merge = function (nums1, m, nums2, n) {
     }
     nums1[--length] = nums1[m - 1] >= nums2[n - 1] ? nums1[--m] : nums2[--n]
   }
+  return nums1;
 };
+
+console.log(merge([1, 4, 2, 3], 7, [0, 2, 1], 3))

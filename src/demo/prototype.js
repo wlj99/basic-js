@@ -129,3 +129,23 @@ function newFactorial = (function f(num) {
     return num * f(num - 1)
   }
 }) //这样就没有问题了，实际上起作用的是闭包函数f，而不是外面的函数newFactorial
+
+
+
+function A() {
+  this.name = '122';
+  this.deg = [1, 2, 3];
+}
+
+function B() {
+
+}
+B.prototype = new A();
+let b1 = new B();
+let b2 = new B();
+b1.name = '3444';
+b1.deg.push('233');
+console.log(b1.name);
+console.log(b1.deg);
+console.log(b2.name);
+console.log(b2.deg);
