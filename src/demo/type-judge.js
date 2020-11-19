@@ -72,3 +72,91 @@ function getType(obj) {
   }
   return map[str];
 }
+
+
+
+/* var funcs = [];
+for (var i = 0; i < 10; i++) {
+  funcs.push((function (value) {
+    return function () {
+      console.log(value);
+    }
+  }(i)));
+}
+funcs.forEach(function (func) {
+  func();
+}) */
+
+var funcs = [];
+for (var i = 0; i < 10; i++) {
+  funcs.push(function (value) {
+    return function () {
+      console.log(value);
+    }
+  }(i));
+}
+funcs.forEach(function (func) {
+  func();
+})
+var text1 = "";
+console.log(text1.length); // 2 
+console.log(/^.$/.test(text1)); // false 
+console.log(text1.charAt(0)); // "" 
+console.log(text1.charAt(1)); // "" 
+console.log(text1.charCodeAt(0)); // 55362 
+console.log(text1.charCodeAt(1)); // 57271
+
+
+
+function Person(name) {
+  if (typeof new.target !== "undefined") {
+    this.name = name; // 使用 new 
+  } else {
+    throw new Error("You must use new with Person.")
+  }
+}
+var person = new Person("Nicholas");
+var notAPerson = Person.call(person, "Michael");
+
+function Person(name) {
+  if (this instanceof Person) {
+    this.name = name; // 使用 new
+  } else {
+    throw new Error("You must use new with Person.")
+  }
+}
+var person = new Person("Nicholas");
+var notAPerson1 = Person.call(person, "Michael");
+var notAPerson1 = Person("Nicholas");
+
+
+var getTempItem = id => ({
+  id: id,
+  name: "Temp"
+});
+
+
+let node = {
+  type: "Identifier",
+  name: "foo",
+  loc: {
+    start: {
+      line: 1,
+      column: 1
+    },
+    end: {
+      line: 1,
+      column: 4
+    }
+  }
+};
+let {
+  loc: {
+    start
+  }
+} = node;
+console.log(loc);
+
+
+let colors = ["red", ["green", "lightgreen"], "blue"];
+let [firstColor, secondColor] = colors

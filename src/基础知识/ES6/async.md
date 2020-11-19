@@ -33,7 +33,7 @@ function timeout(ms) {
 
 async function asyncPrint(value, ms) {
   await timeout(ms);
-  console.log(value);
+  console.log(value, ms);
 }
 
 asyncPrint("hello world", 50);

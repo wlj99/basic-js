@@ -3,6 +3,7 @@ const EventUtils = {
   // 添加事件
   addEvent: function (element, type, handler) {
     if (element.addEventListener) {
+      // 默认 false  在冒泡阶段 执行相关事件  true 捕获阶段
       element.addEventListener(type, handler, false);
     } else if (element.attachEvent) {
       element.attachEvent("on" + type, handler);
