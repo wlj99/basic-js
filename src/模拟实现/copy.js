@@ -11,7 +11,7 @@
 
 //浅拷贝
 function shallowCopy(obj) {
-  if (typeof obj !== 'object') return obj;
+  if (typeof obj !== 'object' || obj === null) return obj;
   let newObj = obj instanceof Array ? [] : {};
   for (let key in obj) {
     if (obj.hasOwnProperty(key)) newObj[key] = obj[key];
